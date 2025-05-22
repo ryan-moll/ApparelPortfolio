@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bag Details</title>
+  <style>
+    html, body {
+      background-color: #ece9d9;
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', Courier, monospace;
+      height: 100%;
+    }
+
+    .page-container {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+    }
+
+    .project-details {
+      width: 50%;
+      padding: 2rem;
+      box-sizing: border-box;
+      overflow-y: auto;
+    }
+
+    .home-button {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: black;
+      text-decoration: none;
+    }
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    
+    a:visited { 
+      text-decoration: none; 
+      color:black; 
+    }
+
+    .image-preview {
+      width: 50%;
+      padding: 2rem;
+      box-sizing: border-box;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid #ddd;
+    }
+
+    .image-placeholder {
+      width: 100%;
+      height: 100%;
+      background-color: white;
+      border: 1px solid #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-placeholder img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .file-category {
+      font-size: 20px;
+      margin-top: 13px;
+    }
+
+    .file-list {
+      padding-left: 20px;
+    }
+
+    .file-item {
+      font-size: 16px;
+      margin-top: 5px;
+      color: black;
+    }
+
+    .file-item a {
+      text-decoration: none;
+      color: black;
+      cursor: pointer;
+    }
+
+    .file-item a:hover {
+      text-decoration: underline;
+    }
+
+    .project-title {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    /* Mobile layout */
+    @media (max-width: 768px) {
+      .page-container {
+        flex-direction: column;
+      }
+
+      .project-details,
+      .image-preview {
+        width: 100%;
+        height: 50vh;
+        padding: 1rem;
+      }
+
+      .image-preview {
+        border-left: none;
+        border-top: 1px solid #ddd;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-container">
+    <div class="project-details">
+      <div class="home-button"> [<a href="roland.html">home</a>] </div>
+      <div class="project-title">bag</div>
+
+      <div class="file-structure">
+        <div class="file-category">details</div>
+        
+        <div class="file-category">|_ inspo pictures</div>
+        <div class="file-list">
+          <div class="file-item"><a onclick="showImage('images/bag/inspo1.png')">inspo1.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/inspo2.png')">inspo2.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/inspo3.png')">inspo3.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/inspo4.png')">inspo4.png</a></div>
+        </div>
+
+        <div class="file-category">|_ tech pack</div>
+        <div class="file-list">
+          <div class="file-item"><a onclick="showImage('images/bag/techpack1.png')">techpack1.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack2.png')">techpack2.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack3.png')">techpack3.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack4.png')">techpack4.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack5.png')">techpack5.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack6.png')">techpack6.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack7.png')">techpack7.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack8.png')">techpack8.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack9.png')">techpack9.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack10.png')">techpack10.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack11.png')">techpack11.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/techpack12.png')">techpack12.png</a></div>
+          <!-- Add others as needed -->
+        </div>
+
+        <div class="file-category">|_ process pictures</div>
+        <div class="file-list">
+          <div class="file-item"><a onclick="showImage('images/bag/process1.jpg')">process1.jpg</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/process2.jpg')">process2.jpg</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/process3.jpg')">process3.jpg</a></div>
+        </div>
+
+        <div class="file-category">|_ final images</div>
+        <div class="file-list">
+          <div class="file-item"><a onclick="showImage('images/bag/bag-01.png')">final1.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/bag-03.png')">final2.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/bag-04.png')">final3.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/bag-05.png')">final4.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/bag-06.png')">final5.png</a></div>
+          <div class="file-item"><a onclick="showImage('images/bag/bag-07.png')">final6.png</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="image-preview">
+      <div class="image-placeholder" id="imageContainer">
+        <!-- Image gets inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showImage(src) {
+      const container = document.getElementById('imageContainer');
+      container.innerHTML = '';
+      const img = document.createElement('img');
+      img.src = src;
+      container.appendChild(img);
+    }
+  </script>
+
+</body>
+</html>

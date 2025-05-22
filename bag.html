@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Project 1</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ece9d9;
+      overflow-x: hidden;
+    }
+
+    .image-scatter {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      padding: 2rem;
+      box-sizing: border-box;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .scattered-img {
+      position: absolute;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      max-width: 200px;
+      transform: rotate(var(--rotation));
+    }
+
+    @media (max-width: 768px) {
+      .scattered-img {
+        max-width: 80px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .scattered-img {
+        max-width: 60px;
+      }
+    }
+
+    .scattered-img.enlarged {
+      z-index: 999;
+      transform: scale(4) rotate(0deg);
+      transition: transform 0.5s ease;
+    }
+
+    .scattered-img.zoomed {
+      transform: scale(8) rotate(0deg); /* Secondary zoom without the lightbox */
+      transition: transform 0.5s ease;
+      z-index: 999;
+    }
+
+    /* Menu always in front */
+    .menu-container {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1001;
+    }
+
+    .menu {
+      font-size: 18px;
+      cursor: pointer;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .projects {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 16px;
+      color: black;
+      padding: 2px 0;
+      white-space: nowrap;
+      display: block;
+      text-decoration: none;
+    }
+
+    .dropdown {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      position: absolute;
+      top: 20px;
+      left: 0;
+    }
+
+    .dropdown.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 16px;
+      color: black;
+      padding: 2px 0;
+      white-space: nowrap;
+      display: block;
+      text-decoration: none;
+    }
+
+    .dropdown-item:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      .menu {
+        font-size: 14px;
+        left: 10px;
+      }
+
+      .dropdown {
+        left: 5px;
+      }
+
+      .dropdown-item {
+        font-size: 14px;
+      }
+    }
+
+    /* Centered "Details" text link */
+    .details-link {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 18px; /* Match the size of the menu text */
+      font-family: 'Courier New', Courier, monospace;
+      text-decoration: none;
+      color: black;
+      background-color: rgba(255, 255, 255, 0.7);
+      padding: 2px;
+      border-radius: 4px;
+      z-index: 1002; /* Ensure it's clickable and above other elements */
+      transition: background-color 0.3s;
+    }
+
+    .details-link:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <div class="menu">[menu]</div>
+    <div class="dropdown">
+      <a href="about.html" class="dropdown-item">|_ about me</a>
+      <a class="projects">|_ projects</a>
+      <a href="suit.html" class="dropdown-item">&nbsp;&nbsp;|_ suit jacket</a>
+      <a href="fleece.html" class="dropdown-item">&nbsp;&nbsp;|_ fleece hoodie</a>
+      <a href="ski.html" class="dropdown-item">&nbsp;&nbsp;|_ ski jacket</a>
+      <a href="bomber.html" class="dropdown-item">&nbsp;&nbsp;|_ bomber</a>
+      <a href="bag.html" class="dropdown-item">&nbsp;&nbsp;|_ bag</a>
+      <a href="shirt.html" class="dropdown-item">&nbsp;&nbsp;|_ shirt</a>
+      <a href="hikingskirt.html" class="dropdown-item">&nbsp;&nbsp;|_ hiking skirt</a>
+      <a href="otherdetails.html" class="dropdown-item">&nbsp;&nbsp;|_ other</a>
+    </div>
+  </div>
+
+  <div class="image-scatter">
+    <!-- Example images (replace with your actual product images) -->
+    <img src="images/bag/bag-01.png" class="scattered-img" />
+    <a href="./roland.html">
+      <img src="images/bag/bag-02.png" class="scattered-img" />
+    </a>
+    <img src="images/bag/bag-03.png" class="scattered-img" />
+    <img src="images/bag/bag-04.png" class="scattered-img" />
+    <img src="images/bag/bag-05.png" class="scattered-img" />
+    <img src="images/bag/bag-06.png" class="scattered-img" />
+    <img src="images/bag/bag-07.png" class="scattered-img" />
+    <!-- ...up to 10 -->
+  </div>
+
+  <!-- Centered "Details" text link -->
+  <a href="bagdetails.html" class="details-link">details</a>
+
+  <script>
+    const menu = document.querySelector('.menu');
+    const dropdown = document.querySelector('.dropdown');
+
+    // Toggle the dropdown
+    menu.addEventListener('click', (e) => {
+      e.stopPropagation(); // Prevent click from triggering outside handler
+      dropdown.classList.toggle('open');
+    });
+
+    // Prevent clicks inside dropdown from closing it
+    dropdown.addEventListener('click', (e) => {
+      e.stopPropagation();
+    });
+
+    // Close dropdown when clicking anywhere else
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('open');
+    });
+
+    const images = document.querySelectorAll('.scattered-img');
+    const placedRects = [];
+    let currentlyEnlarged = null; // Track the currently enlarged image
+
+    function doesOverlap(r1, r2) {
+      return !(
+        r2.left > r1.right ||
+        r2.right < r1.left ||
+        r2.top > r1.bottom ||
+        r2.bottom < r1.top
+      );
+    }
+
+    function getRandomPosition(maxW, maxH, imgWidth, imgHeight) {
+      return {
+        top: Math.random() * (maxH - imgHeight),
+        left: Math.random() * (maxW - imgWidth),
+      };
+    }
+
+    // Close any enlarged image when clicking outside
+    function closeEnlargedImage() {
+      if (currentlyEnlarged) {
+        currentlyEnlarged.classList.remove('enlarged');
+        currentlyEnlarged.classList.remove('zoomed');
+        currentlyEnlarged = null; // Reset the enlarged image
+      }
+    }
+
+    images.forEach((img) => {
+      img.style.position = 'absolute';
+      img.style.visibility = 'hidden'; // Hide until placed
+
+      img.addEventListener('load', () => {
+        const maxAttempts = 100;
+        const padding = 10;
+        const container = document.querySelector('.image-scatter');
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        const imgWidth = img.offsetWidth;
+        const imgHeight = img.offsetHeight;
+
+        let placed = false;
+        let attempts = 0;
+
+        while (!placed && attempts < maxAttempts) {
+          const pos = getRandomPosition(
+            containerWidth - padding,
+            containerHeight - padding,
+            imgWidth,
+            imgHeight
+          );
+
+          const rect = {
+            top: pos.top,
+            left: pos.left,
+            right: pos.left + imgWidth + padding,
+            bottom: pos.top + imgHeight + padding,
+          };
+
+          const overlaps = placedRects.some((r) => doesOverlap(rect, r));
+
+          if (!overlaps) {
+            img.style.top = pos.top + 'px';
+            img.style.left = pos.left + 'px';
+            const rotation = (Math.random() * 30 - 15) + 'deg';
+            img.style.setProperty('--rotation', rotation);
+            placedRects.push(rect);
+            placed = true;
+            img.style.visibility = 'visible';
+          }
+
+          attempts++;
+        }
+      });
+
+      // Handle clicking
+      img.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        if (currentlyEnlarged && currentlyEnlarged !== img) {
+          closeEnlargedImage();
+        }
+
+        if (!img.classList.contains('enlarged')) {
+          img.classList.add('enlarged');
+          currentlyEnlarged = img;
+        } else {
+          // Toggling the zoomed class (second zoom level)
+          img.classList.toggle('zoomed');
+        }
+      });
+    });
+
+    // Close enlarged image if clicked anywhere else on the page
+    document.addEventListener('click', closeEnlargedImage);
+  </script>
+</body>
+</html>
