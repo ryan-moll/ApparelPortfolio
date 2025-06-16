@@ -172,7 +172,7 @@
   </div>
 
   <div class="button-panel">
-    <button class="project-button" onclick="loadLook(1)">concept</button>
+    <button class="project-button" onclick="togglePopup('text-popup')">concept</button>
     <button class="project-button" onclick="loadLook(1)">look 1</button>
     <button class="project-button" onclick="loadLook(2)">look 2</button>
     <button class="project-button" onclick="loadLook(3)">look 3</button>
@@ -205,8 +205,24 @@
   </div>
 
   <div class="popup" id="text-popup">
-    
+    <div class="popup-inner" onclick="event.stopPropagation()">
+        <div style="max-width: 600px; padding: 20px; background-color: rgba(255, 255, 255, 0.95); border: 1px solid black;">
+        <h3>Final Line Concept</h3>
+        <p>
+            Our intention with this collection is to make clothes for people to wear while they ride their bikes.<br><br>
+            Conventional “cycling clothes” are designed for high performance, modeled after the pro peloton and often don't make sense for casual cyclists.<br><br>
+            Both the price and aesthetic of these clothes pose a risk to the accessibility of cycling.<br><br>
+            We wanted to make clothes that look good both on and off the bike, but still provide functional benefits.<br><br>
+            Roland aims to connect with the bike community through events and offering physical spaces for riders to connect.<br><br>
+            Our brand is not driven by profit.<br><br>
+            We want to provide good products, at a fair price, that make our community a better place.<br><br>
+            The clothes will cost between $50 and $200.<br><br>
+            They are made to accomidate a wide range of genders and bodies.
+        </p>
+        </div>
+    </div>
   </div>
+
 
   <script>
     const menu = document.querySelector('.menu');
