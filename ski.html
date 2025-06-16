@@ -16,6 +16,7 @@
       padding: 0;
       background-color: #ece9d9;
       overflow-x: hidden;
+      font-family: 'Courier New', Courier, monospace;
     }
 
     .image-scatter {
@@ -50,12 +51,12 @@
 
     .scattered-img.enlarged {
       z-index: 999;
-      transform: scale(4) rotate(0deg);
+      transform: scale(2) rotate(0deg);
       transition: transform 0.5s ease;
     }
 
     .scattered-img.zoomed {
-      transform: scale(8) rotate(0deg); /* Secondary zoom without the lightbox */
+      transform: scale(4) rotate(0deg); /* Secondary zoom without the lightbox */
       transition: transform 0.5s ease;
       z-index: 999;
     }
@@ -156,35 +157,35 @@
   <div class="menu-container">
     <div class="menu">[menu]</div>
     <div class="dropdown">
-      <a href="about.html" class="dropdown-item">|_ about me</a>
-      <a class="projects">|_ projects</a>
-      <a href="suit.html" class="dropdown-item">&nbsp;&nbsp;|_ suit jacket</a>
-      <a href="fleece.html" class="dropdown-item">&nbsp;&nbsp;|_ fleece hoodie</a>
-      <a href="ski.html" class="dropdown-item">&nbsp;&nbsp;|_ ski jacket</a>
-      <a href="bomber.html" class="dropdown-item">&nbsp;&nbsp;|_ bomber</a>
-      <a href="bag.html" class="dropdown-item">&nbsp;&nbsp;|_ bag</a>
-      <a href="workskirt.html" class="dropdown-item">&nbsp;&nbsp;|_ work skirt</a>
-      <a href="shirt.html" class="dropdown-item">&nbsp;&nbsp;|_ shirt</a>
-      <a href="hikingskirt.html" class="dropdown-item">&nbsp;&nbsp;|_ hiking skirt</a>
+      <a href="./" class="dropdown-item">|_ home</a>
+    <a href="about.html" class="dropdown-item">&nbsp;|_ about me</a>
+    <a href="print.html" class="dropdown-item">&nbsp;|_ print & pattern design</a>
+    <a href="final.html" class="dropdown-item">&nbsp;|_ final line</a>
+    <a class="">&nbsp;|_ projects</a>
+    <a href="suit.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ suit jacket</a>
+    <a href="fleece.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ fleece hoodie</a>
+    <a href="ski.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ ski jacket</a>
+    <a href="bomber.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ bomber</a>
+    <a href="bag.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ bag</a>
+    <a href="shirt.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ shirt</a>
     </div>
   </div>
 
   <div class="image-scatter">
     <!-- Example images (replace with your actual product images) -->
-    <img src="images/bag/bag-01.png" class="scattered-img" />
-    <a href="./">
-      <img src="images/bag/bag-02.png" class="scattered-img" />
-    </a>
-    <img src="images/bag/bag-03.png" class="scattered-img" />
-    <img src="images/bag/bag-04.png" class="scattered-img" />
-    <img src="images/bag/bag-05.png" class="scattered-img" />
-    <img src="images/bag/bag-06.png" class="scattered-img" />
-    <img src="images/bag/bag-07.png" class="scattered-img" />
+    <img src="images/ski/1.png" class="scattered-img" />
+    <img src="images/ski/2.png" class="scattered-img" />
+    <img src="images/ski/3.png" class="scattered-img" />
+    <img src="images/ski/4.png" class="scattered-img" />
+    <img src="images/ski/5.png" class="scattered-img" />
+    <img src="images/ski/6.png" class="scattered-img" />
+    <img src="images/ski/7.png" class="scattered-img" />
+    <img src="images/ski/8.png" class="scattered-img" />
     <!-- ...up to 10 -->
   </div>
 
   <!-- Centered "Details" text link -->
-  <a href="suitdetails.html" class="details-link">details</a>
+  <a href="skidetails.html" class="details-link">details</a>
 
   <script>
     const menu = document.querySelector('.menu');

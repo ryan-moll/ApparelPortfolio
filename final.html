@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>final line</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #ece9d9;
+      font-family: 'Courier New', Courier, monospace;
+      overflow-x: hidden;
+    }
+
+    .menu-container {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 1001;
+        /* Remove any width/overflow rules that might constrain children */
+    }
+
+
+    .menu {
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .dropdown {
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        position: absolute;
+        top: 20px;
+        left: 0;
+        background-color: transparent;
+        border: none;
+        z-index: 1002;
+        min-width: 160px; /* Add this line */
+        padding: 5px 10px; /* Optional for spacing */
+    }
+
+
+    .dropdown.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .dropdown-item {
+      font-size: 16px;
+      color: black;
+      padding: 2px 0;
+      display: block;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .dropdown-item:hover {
+      text-decoration: underline;
+    }
+
+    .button-panel {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    .project-button {
+      background-color: rgba(255,255,255,0.8);
+      border: 1px solid black;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 16px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    .image-scatter {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      z-index: 0;
+    }
+
+    .scattered-img {
+      position: absolute;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      max-width: 200px;
+      transform: rotate(var(--rotation));
+      visibility: hidden;
+    }
+
+    .scattered-img.enlarged {
+      z-index: 999;
+      transform: scale(2) rotate(0deg);
+    }
+
+    .scattered-img.zoomed {
+      transform: scale(4) rotate(0deg);
+    }
+
+    /* Popups */
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        /* background-color: rgba(255, 255, 255, 0.85);  */
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 2000;
+        border: grey;
+        border-width: 3px;
+    }
+
+
+    .popup-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+
+    .popup iframe,
+    .popup img {
+      max-width: 90vw;
+      max-height: 70vh;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .carousel-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="menu-container">
+    <div class="menu">[menu]</div>
+    <div class="dropdown">
+      <a href="./" class="dropdown-item">|_ home</a>
+    <a href="about.html" class="dropdown-item">&nbsp;|_ about me</a>
+    <a href="print.html" class="dropdown-item">&nbsp;|_ print & pattern design</a>
+    <a href="final.html" class="dropdown-item">&nbsp;|_ final line</a>
+    <a class="">&nbsp;|_ projects</a>
+    <a href="suit.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ suit jacket</a>
+    <a href="fleece.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ fleece hoodie</a>
+    <a href="ski.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ ski jacket</a>
+    <a href="bomber.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ bomber</a>
+    <a href="bag.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ bag</a>
+    <a href="shirt.html" class="dropdown-item">&nbsp;&nbsp;&nbsp;|_ shirt</a>
+    </div>
+  </div>
+
+  <div class="button-panel">
+    <button class="project-button" onclick="loadLook(1)">concept</button>
+    <button class="project-button" onclick="loadLook(1)">look 1</button>
+    <button class="project-button" onclick="loadLook(2)">look 2</button>
+    <button class="project-button" onclick="loadLook(3)">look 3</button>
+    <button class="project-button" onclick="togglePopup('video-popup')">video</button>
+    <button class="project-button" onclick="togglePopup('photo-popup')">photos</button>
+  </div>
+
+  <div class="image-scatter" id="scatter-container"></div>
+
+  <!-- Popups -->
+  <div class="popup" id="video-popup">
+    <div class="popup-inner" onclick="event.stopPropagation()">
+        <video width="560" height="315" controls>
+        <source src="images/finalVid.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+        </video>
+    </div>
+  </div>
+
+
+
+  <div class="popup" id="photo-popup">
+    <div class="popup-inner" onclick="event.stopPropagation()">
+        <img id="carousel-img" src="images/final/1.jpg" />
+        <div class="carousel-buttons">
+            <button class="project-button" onclick="prevPhoto()">Prev</button>
+            <button class="project-button" onclick="nextPhoto()">Next</button>
+        </div>
+    </div>
+  </div>
+
+  <div class="popup" id="text-popup">
+    
+  </div>
+
+  <script>
+    const menu = document.querySelector('.menu');
+    const dropdown = document.querySelector('.dropdown');
+
+    menu.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('open');
+    });
+
+    document.addEventListener('click', () => {
+      dropdown.classList.remove('open');
+    });
+
+    const container = document.getElementById('scatter-container');
+    let currentlyEnlarged = null;
+    let currentImages = [];
+
+    function loadLook(setNum) {
+      closeEnlargedImage();
+      container.innerHTML = '';
+      const imagePaths = {
+        1: ['images/pants/pants1.png', 'images/pants/pants2.png', 'images/pants/pants3.png', 'images/pants/pants4.png', 'images/pants/pants5.png', 'images/pants/pants6.png', 'images/pants/pants7.png', 'images/fleece/1.png', 'images/fleece/2.png', 'images/fleece/3.png', 'images/fleece/4.png', 'images/fleece/5.png', 'images/fleece/6.png', 'images/fleece/7.png'],
+        2: ['images/dress/1.png', 'images/dress/2.png', 'images/dress/4.png', 'images/vest/1.png', 'images/vest/2.png', 'images/vest/5.png', 'images/alpha/2.png', 'images/alpha/3.png', 'images/alpha/4.png'],
+        3: ['images/look3/1.jpg', 'images/look3/2.jpg', 'images/look3/3.jpg']
+      };
+
+      const paths = imagePaths[setNum];
+      const placedRects = [];
+
+      paths.forEach((src) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = 'scattered-img';
+        container.appendChild(img);
+
+        img.onload = () => {
+          const maxW = container.clientWidth;
+          const maxH = container.clientHeight;
+          const padding = 10;
+          const imgW = img.offsetWidth;
+          const imgH = img.offsetHeight;
+
+          let placed = false;
+          let attempts = 0;
+
+          while (!placed && attempts < 100) {
+            const top = Math.random() * (maxH - imgH - padding);
+            const left = Math.random() * (maxW - imgW - padding);
+            const rect = { top, left, right: left + imgW + padding, bottom: top + imgH + padding };
+
+            const overlap = placedRects.some(r =>
+              !(r.right < rect.left || r.left > rect.right || r.bottom < rect.top || r.top > rect.bottom)
+            );
+
+            if (!overlap) {
+              img.style.top = top + 'px';
+              img.style.left = left + 'px';
+              img.style.setProperty('--rotation', (Math.random() * 30 - 15) + 'deg');
+              img.style.visibility = 'visible';
+              placedRects.push(rect);
+              placed = true;
+            }
+            attempts++;
+          }
+        };
+
+        img.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (currentlyEnlarged && currentlyEnlarged !== img) {
+            closeEnlargedImage();
+          }
+          if (!img.classList.contains('enlarged')) {
+            img.classList.add('enlarged');
+            currentlyEnlarged = img;
+          } else {
+            img.classList.toggle('zoomed');
+          }
+        });
+      });
+    }
+
+    function closeEnlargedImage() {
+      if (currentlyEnlarged) {
+        currentlyEnlarged.classList.remove('enlarged', 'zoomed');
+        currentlyEnlarged = null;
+      }
+    }
+
+    document.addEventListener('click', closeEnlargedImage);
+
+    function togglePopup(id) {
+        const popup = document.getElementById(id);
+
+        if (popup.style.display !== 'flex') {
+            popup.style.display = 'flex';
+            popup.onclick = () => {
+            popup.style.display = 'none';
+            };
+        } else {
+            popup.style.display = 'none';
+            popup.onclick = null;
+        }
+    }
+
+    // Photo carousel logic
+    let photoIndex = 0;
+    const photoSet = ['images/final/1.jpg', 'images/final/2.jpg', 'images/final/3.jpg', 'images/final/4.jpg', 'images/final/5.png'];
+    const carouselImg = document.getElementById('carousel-img');
+
+    function nextPhoto() {
+      photoIndex = (photoIndex + 1) % photoSet.length;
+      carouselImg.src = photoSet[photoIndex];
+    }
+
+    function prevPhoto() {
+      photoIndex = (photoIndex - 1 + photoSet.length) % photoSet.length;
+      carouselImg.src = photoSet[photoIndex];
+    }
+  </script>
+</body>
+</html>
